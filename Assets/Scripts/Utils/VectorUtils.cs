@@ -27,7 +27,8 @@ public class VectorUtils
     {
         if (interp < 0 || interp > 1)
             throw new ArgumentException();
-        return Vector3.Lerp(a, b, Mathf.Cos((1 + interp) * Mathf.PI));
+        float interpVal = (Mathf.Cos((1 + interp) * Mathf.PI) + 1) / 2;
+        return Vector3.Lerp(a, b, interpVal);
     }
 
     public static Vector2Int DirToVec(Direction dir)

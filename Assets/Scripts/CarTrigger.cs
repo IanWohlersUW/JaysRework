@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 public class CarTrigger : MonoBehaviour
 {
+    private static readonly Vector3 CAR_SCALE = new Vector3(0.15f, 0.17f, 1f);
+
     public bool isMoving = false;
+    [NotNull]
     public SpriteRenderer carPrefab;
+    [NotNull]
     public TMPro.TextMeshProUGUI countdownText;
+    [NotNull]
+    public Image warningSign;
 
     private int countdownValue; // access this via the countdown property
     public int countdown
@@ -66,7 +72,7 @@ public class CarTrigger : MonoBehaviour
         (Vector3 start, Vector3 end) = (new Vector3(xPos, yTop, 0), new Vector3(xPos, yBottom, 0));
 
         var car = Instantiate(carPrefab, start, Quaternion.identity);
-        GameBoard.ScaleToGameboard(car);
+        car.transform.localScale = CAR_SCALE;
         car.transform.position = start;
 
         float elapsed = 0f;

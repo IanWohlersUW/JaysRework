@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Tilemap))]
 public class GameBoard : MonoBehaviour
@@ -43,7 +43,5 @@ public class GameBoard : MonoBehaviour
         Vector3 scale = new Vector3(boardCellSize.x / currSize.x, boardCellSize.y / currSize.y, 1);
         sprite.gameObject.transform.localScale = scale;
     }
-
     // We could add a function for serializing a GameBoard, then leverage this for level loading
-
 }

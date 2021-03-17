@@ -28,12 +28,14 @@ public class Player : GamePiece
 
     Direction? InputToDir()
     {
-        var vert = Input.GetAxis("Vertical");
-        if (vert != 0f)
-            return vert > 0 ? Direction.Up : Direction.Down;
-        var horizontal = Input.GetAxis("Horizontal");
-        if (horizontal != 0f)
-            return horizontal > 0 ? Direction.Right : Direction.Left;
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            return Direction.Up;
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            return Direction.Right;
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            return Direction.Down;
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            return Direction.Left;
         return null;
     }
 
@@ -56,5 +58,12 @@ public class Player : GamePiece
         GameBoard.instance.pieces.Remove(follower);
         MoveFollowers(gap, pos + 1);
         followers.RemoveAt(pos);
+    }
+
+    public bool OnZebra()
+    {
+        var currTile = GameBoard.instance.playmat.GetTile(VectorUtils.Vec2To3(GetPosition()));
+        // Need to add a tag for our zebra tiles!
+        return false;
     }
 }

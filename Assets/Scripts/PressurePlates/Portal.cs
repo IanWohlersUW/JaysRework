@@ -28,6 +28,6 @@ public class Portal : PressurePlate
     {
         // We need to wait for the player to fully land on the manhole
         yield return new WaitUntil(() => !player.isMoving);
-        player.MovePiece(dest);
+        player.WarpPiece(dest);
     }
 }

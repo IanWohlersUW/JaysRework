@@ -27,16 +27,30 @@ public class GamePiece : MonoBehaviour
 
     public Vector2Int GetPosition() => GameBoard.instance.pieces.Reverse[this];
 
-    // Moves the piece to the given tile, returns false if unsuccessful
-    public virtual bool MovePiece(Vector2Int dest)
+    private bool MovePieceHelper(Vector2Int dest)
     {
         if (!CanMove(dest))
             return false;
-        // This should be a coroutine... that'll be a lil trickier ;)
         GameBoard.instance.pieces.Remove(this);
         GameBoard.instance.pieces.Add(dest, this);
-        // rb.position = GameBoard.instance.GridToWorld(dest);
+        return true;
+    }
+
+    // Moves the piece to the given tile, returns false if unsuccessful
+    public virtual bool MovePiece(Vector2Int dest)
+    {
+        if (!MovePieceHelper(dest))
+            return false;
         StartCoroutine(MovePieceAnimation(dest));
+        return true;
+    }
+
+    // Moves the piece to the given tile, returns false if unsuccessful
+    public virtual bool WarpPiece(Vector2Int dest)
+    {
+        if (!MovePieceHelper(dest))
+            return false;
+        StartCoroutine(WarpPieceAnimation(dest));
         return true;
     }
 
@@ -50,8 +64,7 @@ public class GamePiece : MonoBehaviour
 
     public virtual bool CanMove(Vector2Int dest) => !GameBoard.instance.pieces.Contains(dest);
 
-    // This animation is really choppy and I'm not sure why :(
-    IEnumerator MovePieceAnimation(Vector2Int dest, float duration = 0.5f)
+    IEnumerator MovePieceAnimation(Vector2Int dest, float duration = 0.2f)
     {
         isMoving = true;
         (Vector3 start, Vector3 end) = (
@@ -69,6 +82,16 @@ public class GamePiece : MonoBehaviour
             elapsed *= 1.02f;
         }
         rb.position = end;
+        isMoving = false;
+    }
+
+    IEnumerator WarpPieceAnimation(Vector2Int dest, float duration = 0.2f)
+    {
+        isMoving = true;
+        sr.enabled = false;
+        rb.position = GameBoard.instance.GridToWorld(dest);
+        yield return new WaitForSeconds(duration);
+        sr.enabled = true;
         isMoving = false;
     }
 

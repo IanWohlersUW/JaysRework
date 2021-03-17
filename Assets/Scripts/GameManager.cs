@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         if (!canMove || !GameBoard.instance.player.MovePlayer())
             return;
+        canMove = false;
         StartCoroutine(ExecuteTurn());
     }
 
