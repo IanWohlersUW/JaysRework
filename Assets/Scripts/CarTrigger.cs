@@ -7,6 +7,7 @@ public class CarTrigger : MonoBehaviour
 {
     private static readonly Vector3 CAR_SCALE = new Vector3(0.15f, 0.17f, 1f);
 
+    [HideInInspector]
     public bool isMoving = false;
     [NotNull]
     public SpriteRenderer carPrefab;
@@ -14,6 +15,8 @@ public class CarTrigger : MonoBehaviour
     public TMPro.TextMeshProUGUI countdownText;
     [NotNull]
     public Image warningSign;
+    [SerializeField]
+    private int startingCountdown;
 
     private int countdownValue; // access this via the countdown property
     public int countdown
@@ -25,16 +28,12 @@ public class CarTrigger : MonoBehaviour
         }
     }
 
-    public virtual void Create(int x, int countdown)
+    protected virtual void Start()
     {
-        if (GameBoard.instance.cars.Contains(x))
-        {
-            Debug.LogError("Attempting to spawn car in filled space");
-            return;
-        }
+        int x = GameBoard.instance.WorldToGrid(transform.position).x;
         GameBoard.instance.cars.Add(x, this);
         transform.position = new Vector3(GetXPos(), 0, 0);
-        this.countdown = countdown;
+        this.countdown = startingCountdown;
     }
 
     public virtual void Tic()
@@ -75,6 +74,7 @@ public class CarTrigger : MonoBehaviour
         (Vector3 start, Vector3 end) = (new Vector3(xPos, yTop, 0), new Vector3(xPos, yBottom, 0));
 
         var car = Instantiate(carPrefab, start, Quaternion.identity);
+        car.enabled = true;
         car.transform.localScale = CAR_SCALE;
         car.transform.position = start;
 

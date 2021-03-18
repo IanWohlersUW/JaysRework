@@ -65,6 +65,7 @@ public class Level : ScriptableObject
 
     public Tilemap levelPlaymat;
 
+    /*
     public void LoadLevel()
     {
         // There should be a way to configure the camera as well?
@@ -92,7 +93,7 @@ public class Level : ScriptableObject
             foreach (PortalPos portal in portals)
             {
                 var portalInstance = Instantiate(portal.portal);
-                portalInstance.Create(portal.pos, portal.dest);
+                portalInstance.Create(portal.pos);
             }
 
         if (cars != null)
@@ -116,4 +117,5 @@ public class Level : ScriptableObject
             }
         }
     }
+    */
 }

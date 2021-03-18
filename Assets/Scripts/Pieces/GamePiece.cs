@@ -7,23 +7,20 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class GamePiece : MonoBehaviour
 {
+    [HideInInspector]
     public bool justWarped = false;
+    [HideInInspector]
     public bool isMoving = false;
     public SpriteRenderer sr;
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
-    public virtual void Create(Vector2Int coords)
+    protected virtual void Start()
     {
-        if (GameBoard.instance.pieces.Contains(coords))
-        {
-            Debug.LogError("Attempting to spawn piece in filled space");
-            return;
-        }
+        Vector2Int coords = GameBoard.instance.WorldToGrid(transform.position);
         GameBoard.instance.pieces.Add(coords, this); // place this piece on the board
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         rb.position = GameBoard.instance.GridToWorld(coords); // and sync its piece position
-        GameBoard.ScaleToGameboard(sr);
     }
 
     public Vector2Int GetPosition() => GameBoard.instance.pieces.Reverse[this];

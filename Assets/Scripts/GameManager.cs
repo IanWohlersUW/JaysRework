@@ -1,18 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    [NotNull]
-    public Level level;
     private bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        level.LoadLevel();
+        // level.LoadLevel();
     }
 
     // Update is called once per frame
@@ -37,6 +34,11 @@ public class GameManager : MonoBehaviour
 
         // And finally clean up our turn
         yield return new WaitUntil(MovingFinished);
+
+        if (GameBoard.instance.OnGoal() && GameBoard.instance.GetCopCount() == 0)
+        {
+            Debug.Log("Won game!");
+        }
         canMove = true;
     }
 

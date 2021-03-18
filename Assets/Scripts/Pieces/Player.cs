@@ -7,6 +7,15 @@ public class Player : GamePiece
     private List<Vector2Int> locationHist = new List<Vector2Int>(); // should cap this array (this is not great
     public List<GamePiece> followers = new List<GamePiece>();
 
+    protected override void Start()
+    {
+        base.Start();
+        if (GameBoard.instance.player != null)
+            Debug.LogError("Created a singleton player when one already exists");
+        GameBoard.instance.player = this;
+    }
+
+    /*
     public override void Create(Vector2Int coords)
     {
         base.Create(coords);
@@ -14,6 +23,7 @@ public class Player : GamePiece
             Debug.LogError("Created a singleton player when one already exists");
         GameBoard.instance.player = this;
     }
+    */
 
     public override bool MovePiece(Vector2Int dest)
     {

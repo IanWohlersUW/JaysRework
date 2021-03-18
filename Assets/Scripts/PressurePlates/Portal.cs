@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Portal : PressurePlate
 {
-    [HideInInspector]
-    public Vector2Int dest;
+    [SerializeField]
+    private GameObject worldDest;
+    private Vector2Int dest;
 
-    public override void Create(Vector2Int coords) =>
-        Debug.LogError("Need to specify a destination for our portal, use other Create method");
-
-    public void Create(Vector2Int coords, Vector2Int dest)
+    protected override void Start()
     {
-        base.Create(coords);
-        this.dest = dest;
+        dest = GameBoard.instance.WorldToGrid(worldDest.transform.position);
+        base.Start();
     }
 
     public override void OnStep(GamePiece piece)
