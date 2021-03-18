@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class GamePiece : MonoBehaviour
 {
+    public bool justWarped = false;
     public bool isMoving = false;
     public SpriteRenderer sr;
     Rigidbody2D rb;
@@ -40,7 +41,11 @@ public class GamePiece : MonoBehaviour
     public virtual bool MovePiece(Vector2Int dest)
     {
         if (!MovePieceHelper(dest))
+        {
+            // Debug.LogError("Space was occupied, move failed");
             return false;
+        }
+        justWarped = false;
         StartCoroutine(MovePieceAnimation(dest));
         return true;
     }
@@ -48,8 +53,12 @@ public class GamePiece : MonoBehaviour
     // Moves the piece to the given tile, returns false if unsuccessful
     public virtual bool WarpPiece(Vector2Int dest)
     {
-        if (!MovePieceHelper(dest))
+        if (justWarped || !MovePieceHelper(dest))
+        {
+            // Debug.LogError("Space was occupied, warp failed");
             return false;
+        }
+        justWarped = true;
         StartCoroutine(WarpPieceAnimation(dest));
         return true;
     }

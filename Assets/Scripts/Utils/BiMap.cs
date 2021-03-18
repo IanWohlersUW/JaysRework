@@ -24,8 +24,8 @@ public class BiMap<T1, T2>
         }
     }
 
-    public bool Contains(T1 key) => _forward.ContainsKey(key);
-    public bool Contains(T2 key) => _reverse.ContainsKey(key);
+    public bool Contains(T1 key) => key != null && _forward.ContainsKey(key);
+    public bool Contains(T2 key) => key != null && _reverse.ContainsKey(key);
 
     public void Add(T1 t1, T2 t2)
     {
@@ -50,10 +50,12 @@ public class BiMap<T1, T2>
 
     public Dictionary<T1, T2>.KeyCollection GetKeys() => _forward.Keys;
 
-    public T2 GetOrDefault(T1 key, T2 defaultVal) => 
-        _forward.ContainsKey(key) ? _forward[key] : defaultVal;
+
+    // Ok technically these are flawed if T1 T2 are of same type - fix this later
+    public T2 GetOrDefault(T1 key, T2 defaultVal) =>
+        Contains(key) ? _forward[key] : defaultVal;
     public T1 GetOrDefault(T2 key, T1 defaultVal) =>
-        _reverse.ContainsKey(key) ? _reverse[key] : defaultVal;
+        Contains(key) ? _reverse[key] : defaultVal;
 
     public Indexer<T1, T2> Forward { get; private set; }
     public Indexer<T2, T1> Reverse { get; private set; }

@@ -18,16 +18,15 @@ public class Portal : PressurePlate
 
     public override void OnStep(GamePiece piece)
     {
-        var player = piece.gameObject.GetComponent<Player>();
-        if (player == null)
+        if (piece == null)
             return;
-        StartCoroutine(MovePlayer(player));
+        StartCoroutine(MovePiece(piece));
     }
 
-    IEnumerator MovePlayer(Player player)
+    IEnumerator MovePiece(GamePiece piece)
     {
         // We need to wait for the player to fully land on the manhole
-        yield return new WaitUntil(() => !player.isMoving);
-        player.WarpPiece(dest);
+        yield return new WaitUntil(() => !piece.isMoving);
+        piece.WarpPiece(dest);
     }
 }

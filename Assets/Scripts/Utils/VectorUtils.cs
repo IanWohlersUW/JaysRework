@@ -10,16 +10,13 @@ public class VectorUtils
 {
     public static Vector2Int Vec3To2(Vector3Int orig) => new Vector2Int(orig.x, orig.y);
     public static Vector3Int Vec2To3(Vector2Int orig, int z = 0) => new Vector3Int(orig.x, orig.y, z);
-    public static List<Vector2Int> GetAdjacentTiles(Vector2Int pos)
-    {
-        int x = pos.x, y = pos.y;
-        return new List<Vector2Int> {
-            new Vector2Int(x, y + 1),
-            new Vector2Int(x, y - 1),
-            new Vector2Int(x + 1, y),
-            new Vector2Int(x - 1, y)
+    public static HashSet<Vector2Int> GetAdjacentTiles(Vector2Int pos) => 
+        new HashSet<Vector2Int> {
+            pos + Vector2Int.right,
+            pos + Vector2Int.down,
+            pos + Vector2Int.left,
+            pos + Vector2Int.up
         };
-    }
 
     // Returns a weighted average between vectors (first, second)
     // Sinusoidally smooths this interpolation

@@ -6,46 +6,20 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     [NotNull]
-    public Player jay;
-    [NotNull]
-    public GamePiece follower;
-    [NotNull]
-    public CarTrigger carTrigger;
-    [NotNull]
-    public Portal portalPrefab;
-    [NotNull]
-    public Spawner copSpawner;
-
+    public Level level;
     private bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        var player = Instantiate(jay);
-        player.Create(Vector2Int.zero); // can change this spawn position
-
-        var fanHole1 = Instantiate(copSpawner);
-        fanHole1.Create(Vector2Int.right);
-
-        var fanHole2 = Instantiate(copSpawner);
-        fanHole2.Create(Vector2Int.right * 2);
-
-        var carColumn = Instantiate(carTrigger);
-        carColumn.Create(2, 5);
-
-        var carColumn2 = Instantiate(carTrigger);
-        carColumn2.Create(3, 5);
-
-        var portal = Instantiate(portalPrefab);
-        portal.Create(Vector2Int.up, new Vector2Int(2, -3));
-
-        GameBoard.instance.player = player;
+        level.LoadLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!canMove || !GameBoard.instance.player.MovePlayer())
+        // Honestly the way this works is pretty janky
+        if (!canMove || !GameBoard.instance.player.TurnMove())
             return;
         canMove = false;
         StartCoroutine(ExecuteTurn());

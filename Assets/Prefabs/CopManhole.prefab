@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2da76246fe97d84b815e142b7fda66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 7309289246777981031, guid: 405f7acd4debc1144bc9254cca828bca, type: 3}
+  toSpawn: {fileID: 5966705498699734503, guid: 58beffd8241ce6b46bf08b52a1f03b57, type: 3}

@@ -39,6 +39,9 @@ public class CarTrigger : MonoBehaviour
 
     public virtual void Tic()
     {
+        if (GameBoard.instance.player.OnZebra())
+            return; // don't tic if player is on a zebra tile
+
         countdown--;
         if (countdown == 0)
         {
