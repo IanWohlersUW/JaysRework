@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5645235796279605896}
   - component: {fileID: 1823025074407406159}
   - component: {fileID: 704930845715060117}
+  - component: {fileID: 2194297446989072788}
   m_Layer: 0
   m_Name: FanSpawner
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681831402554792603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.51, y: 0.52, z: -0.24650833}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06661993, y: 0.3997171}
+  m_Offset: {x: 0.008841537, y: 0.10360266}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.57, y: 5.57}
+    oldSize: {x: 0.7436582, y: 0.7436582}
     newSize: {x: 7.49, y: 7.49}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8266373, y: 3.093114}
+  m_Size: {x: 0.37105483, y: 0.3341947}
   m_EdgeRadius: 0
 --- !u!114 &704930845715060117
 MonoBehaviour:
@@ -144,4 +145,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2da76246fe97d84b815e142b7fda66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 4734173525485149867, guid: 8c00380ff08f79b46bd36aa12588b980, type: 3}
+  anim: {fileID: 2194297446989072788}
+  toSpawn: {fileID: 5716584800439218943, guid: 8c00380ff08f79b46bd36aa12588b980, type: 3}
+--- !u!95 &2194297446989072788
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681831402554792603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 310952745951aa842acd203a1a7f4cd7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

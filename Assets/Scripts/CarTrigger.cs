@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class CarTrigger : MonoBehaviour
 {
-    private static readonly Vector3 CAR_SCALE = new Vector3(0.15f, 0.17f, 1f);
-
     [HideInInspector]
     public bool isMoving = false;
     [NotNull]
@@ -75,7 +73,6 @@ public class CarTrigger : MonoBehaviour
 
         var car = Instantiate(carPrefab, start, Quaternion.identity);
         car.enabled = true;
-        car.transform.localScale = CAR_SCALE;
         car.transform.position = start;
 
         float elapsed = 0f;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : GamePiece
 {
-    private List<Vector2Int> locationHist = new List<Vector2Int>(); // should cap this array (this is not great
+    public List<Vector2Int> locationHist = new List<Vector2Int>(); // should cap this array (this is not great
     public List<GamePiece> followers = new List<GamePiece>();
 
     protected override void Start()

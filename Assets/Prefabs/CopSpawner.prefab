@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6757728740141577916}
   - component: {fileID: 6757728740141577918}
   - component: {fileID: 2065152694633396973}
+  - component: {fileID: 557998260451817716}
   m_Layer: 0
   m_Name: CopSpawner
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6757728740141577905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.51, y: 0.52, z: -0.24650833}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06661993, y: 0.3997171}
+  m_Offset: {x: -0.041052192, y: 0.09823519}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.49, y: 7.49}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 7.49, y: 7.49}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8266373, y: 3.093114}
+  m_Size: {x: 0.26834792, y: 0.35393554}
   m_EdgeRadius: 0
 --- !u!114 &2065152694633396973
 MonoBehaviour:
@@ -144,5 +145,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2da76246fe97d84b815e142b7fda66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: -9110666412200154705, guid: c9bef399aea15204ebf9a1083071910a,
-    type: 3}
+  anim: {fileID: 557998260451817716}
+  toSpawn: {fileID: 1271483006146338692, guid: c9bef399aea15204ebf9a1083071910a, type: 3}
+--- !u!95 &557998260451817716
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6757728740141577905}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b02e2b0308372db40a47078fa5bc95c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

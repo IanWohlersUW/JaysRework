@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Spawner : PressurePlate
 {
+    public Animator anim;
     public GamePiece toSpawn;
+
+    public override void OnStep(GamePiece piece)
+    {
+        base.OnStep(piece);
+        anim.SetTrigger("Step");
+    }
 
     public override void OffStep(GamePiece piece)
     {
