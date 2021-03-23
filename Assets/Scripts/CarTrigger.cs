@@ -28,9 +28,9 @@ public class CarTrigger : MonoBehaviour
 
     protected virtual void Start()
     {
-        int x = GameBoard.instance.WorldToGrid(transform.position).x;
-        GameBoard.instance.cars.Add(x, this);
-        transform.position = new Vector3(GetXPos(), 0, 0);
+        var location = GameBoard.instance.WorldToGrid(transform.position);
+        GameBoard.instance.cars.Add(location.x, this);
+        transform.position = GameBoard.instance.GridToWorld(location);
         this.countdown = startingCountdown;
     }
 
@@ -58,7 +58,7 @@ public class CarTrigger : MonoBehaviour
     }
 
     public int GetPosition() => GameBoard.instance.cars.Reverse[this];
-    private float GetWorldX(int gridX) => GameBoard.instance.GridToWorld(new Vector2Int(gridX, 0)).x;
+    private float GetWorldX(int x) => GameBoard.instance.GridToWorld(Vector2Int.right * x).x;
     private float GetXPos() => GetWorldX(GetPosition());
 
     IEnumerator SendCarAnimation(float duration = 0.5f)
@@ -86,5 +86,11 @@ public class CarTrigger : MonoBehaviour
         }
         Destroy(car.gameObject);
         isMoving = false;
+    }
+
+    // This callback makes sure our countdown value is displayed in editor view
+    private void OnValidate()
+    {
+        countdownText.text = $"{startingCountdown}";
     }
 }

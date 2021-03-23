@@ -7,10 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class GamePiece : MonoBehaviour
 {
+    public event OnDestroyDelegate OnDestroyEvnt;
+    public delegate void OnDestroyDelegate(MonoBehaviour instance);
+
     [HideInInspector]
     public bool justWarped = false;
     [HideInInspector]
     public bool isMoving = false;
+    [HideInInspector]
     public SpriteRenderer sr;
     private Rigidbody2D rb;
 
@@ -21,6 +25,9 @@ public class GamePiece : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         rb.position = GameBoard.instance.GridToWorld(coords); // and sync its piece position
+
+        if (GameManager.instance != null)
+            OnDestroyEvnt += GameManager.instance.OnPieceDestroyed;
     }
 
     public Vector2Int GetPosition() => GameBoard.instance.pieces.Reverse[this];
@@ -65,6 +72,7 @@ public class GamePiece : MonoBehaviour
     {
         GameBoard.instance.player.RemoveFollower(this);
         GameBoard.instance.pieces.Remove(this);
+        this.OnDestroyEvnt?.Invoke(this);
         Destroy(gameObject);
     }
 

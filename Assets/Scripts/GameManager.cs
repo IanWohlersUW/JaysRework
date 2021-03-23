@@ -1,15 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    [HideInInspector]
+    public static GameManager instance;
+
+    [NotNull]
+    public SceneAsset nextLevel;
+    public int copsToKill;
+    [HideInInspector]
+    public int copsKilled;
     private bool canMove = true;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        // level.LoadLevel();
+        instance = this;
     }
 
     // Update is called once per frame
@@ -35,11 +44,17 @@ public class GameManager : MonoBehaviour
         // And finally clean up our turn
         yield return new WaitUntil(MovingFinished);
 
-        if (GameBoard.instance.OnGoal() && GameBoard.instance.GetCopCount() == 0)
+        if (GameBoard.instance.OnGoal() && copsKilled >= copsToKill)
         {
-            Debug.Log("Won game!");
+            FinishLevel();
         }
         canMove = true;
+    }
+
+    public void FinishLevel()
+    {
+        Debug.Log($"Won game! Loading level {nextLevel.name}");
+        SceneManager.LoadScene(nextLevel.name);
     }
 
     private bool MovingFinished()
@@ -48,5 +63,11 @@ public class GameManager : MonoBehaviour
         if (player.isMoving)
             return false;
         return player.followers.All(follower => !follower.isMoving);
+    }
+
+    public void OnPieceDestroyed(MonoBehaviour instance)
+    {
+        if (instance.gameObject.tag == "Cop")
+            copsKilled++;
     }
 }

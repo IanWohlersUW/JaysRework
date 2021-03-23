@@ -10,10 +10,10 @@ public class Follower : GamePiece
     {
         if (!base.MovePiece(dest))
             return false;
-        int nextMoveI = GameBoard.instance.player.followers.IndexOf(this) - 1;
-        Vector2Int nextDest = nextMoveI < 0 ? GameBoard.instance.player.GetPosition()
-            : GameBoard.instance.player.locationHist[nextMoveI];
-        string trigger = DirectionToTrigger(nextDest - GetPosition());
+        int followerI = GameBoard.instance.player.followers.IndexOf(this);
+        GamePiece nextPiece = followerI == 0 ? GameBoard.instance.player :
+            GameBoard.instance.player.followers[followerI - 1];
+        string trigger = DirectionToTrigger(nextPiece.GetPosition() - GetPosition());
         if (trigger != null)
             anim.SetTrigger(trigger);
         return true;

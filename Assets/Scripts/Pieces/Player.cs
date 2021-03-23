@@ -15,16 +15,6 @@ public class Player : GamePiece
         GameBoard.instance.player = this;
     }
 
-    /*
-    public override void Create(Vector2Int coords)
-    {
-        base.Create(coords);
-        if (GameBoard.instance.player != null)
-            Debug.LogError("Created a singleton player when one already exists");
-        GameBoard.instance.player = this;
-    }
-    */
-
     public override bool MovePiece(Vector2Int dest)
     {
         Vector2Int oldPos = GetPosition();
@@ -82,10 +72,9 @@ public class Player : GamePiece
         int pos = followers.IndexOf(follower);
         if (pos < 0)
             return; // GamePiece not following player!
-        var gap = follower.GetPosition();
         GameBoard.instance.pieces.Remove(follower);
-        MoveFollowers(pos + 1);
         followers.RemoveAt(pos);
+        MoveFollowers(pos);
     }
 
     public bool OnZebra()
